@@ -89,8 +89,8 @@ export default class Register extends Component {
     })
   }
 
-  onSumbit() {
-    request.post('/???')
+  onSumbit(event) {
+    request.post('/api/user')
       .send({
         name: this.state.name,
         email: this.state.email,
@@ -99,9 +99,10 @@ export default class Register extends Component {
         confirmPassword: this.state.confirmPassword
       })
       .end((err, res) => {
-        if (err) return console.err(err);
+        if (err) return console.error(err);
         console.log(res.statusCode);
       })
+    event.preventDefault();
   }
 }
 
