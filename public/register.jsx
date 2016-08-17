@@ -13,7 +13,7 @@ export default class Register extends Component {
   }
 
   render() {
-    return <form onClick= {this.onSumbit.bind(this)}>
+    return <form onClick={this.onSumbit.bind(this)}>
       <div className="register">
         <div className="title"><h3>欢迎注册</h3></div>
         <div className="form-group">
@@ -33,7 +33,7 @@ export default class Register extends Component {
         <div className="form-group">
           <label>手机号码</label>
           <input type="text" className="form-control" id="phone"
-                 placeholder="请输入手机号码" required
+                 placeholder="请输入手机号码" required pattern="^(\+86)?(1[0-9]{10})$"
                  value={this.state.phone}
                  onChange={this.onHandlerPhone.bind(this)}/>
         </div>
@@ -54,12 +54,6 @@ export default class Register extends Component {
         <input type="submit" value="注册" className="btn btn-primary"/>
         <span>有账号?<a className="to_register">登陆 </a></span>
       </div>
-      <hr/>
-      <div>{this.state.name}</div>
-      <div>{this.state.email}</div>
-      <div>{this.state.phone}</div>
-      <div>{this.state.password}</div>
-      <div>{this.state.confirmPassword}</div>
     </form>
   }
 
@@ -94,19 +88,20 @@ export default class Register extends Component {
       confirmPassword: event.target.value
     })
   }
-  onSumbit(){
+
+  onSumbit() {
     request.post('/???')
       .send({
-        name:this.state.name,
-        email:this.state.email,
-        phone:this.state.phone,
-        password:this.state.password,
-        confirmPassword:this.state.confirmPassword
+        name: this.state.name,
+        email: this.state.email,
+        phone: this.state.phone,
+        password: this.state.password,
+        confirmPassword: this.state.confirmPassword
       })
-      .end((err,res) =>{
-        if(err) return console.err(err);
-      console.log(res.statusCode);
-    })
+      .end((err, res) => {
+        if (err) return console.err(err);
+        console.log(res.statusCode);
+      })
   }
 }
 
